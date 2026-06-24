@@ -6,7 +6,7 @@ import type { RefObject } from "react";
 
 export function useCountUp(target: number, ref: RefObject<HTMLElement>, duration = 1300) {
   const [value, setValue] = useState(0);
-  const inView = useInView(ref, { once: true, amount: 0.35 });
+  const inView = useInView(ref, { once: true, amount: 0.2 });
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -28,7 +28,11 @@ export function useCountUp(target: number, ref: RefObject<HTMLElement>, duration
     };
 
     frame = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(frame);
+    const fallback = window.setTimeout(() => setValue(target), duration + 120);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(fallback);
+    };
   }, [duration, inView, reduceMotion, target]);
 
   return value;

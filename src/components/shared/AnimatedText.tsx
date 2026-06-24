@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
@@ -11,15 +12,20 @@ interface AnimatedTextProps {
 
 export function AnimatedText({ text, className }: AnimatedTextProps) {
   const reduceMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
   const words = text.split(" ");
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <h1 className={cn("font-display text-[clamp(3.5rem,13vw,11rem)] font-bold leading-[0.85] tracking-normal", className)}>
-      <span className="sr-only">{text}</span>
+    <h1 className={cn("hero-headline text-[clamp(3.5rem,13vw,11rem)] leading-[0.85]", className)}>
+      <span className={cn("static-headline", mounted && "sr-only")}>{text}</span>
       <motion.span
         aria-hidden="true"
-        className="block"
-        initial={reduceMotion ? false : "hidden"}
+        className={cn("block", !mounted && "hidden")}
+        initial={reduceMotion || !mounted ? false : "hidden"}
         animate="visible"
         variants={{
           visible: { transition: { staggerChildren: 0.08, delayChildren: 0.25 } },

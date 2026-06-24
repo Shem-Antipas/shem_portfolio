@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { budgetRanges, projectTypes } from "@/lib/data";
+import { projectTypes } from "@/lib/data";
 import { contactSchema, type ContactInput } from "@/lib/validations";
 
 const socials = [
@@ -34,7 +34,7 @@ export function Contact() {
     formState: { errors },
   } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { name: "", email: "", projectType: "", budgetRange: "", message: "" },
+    defaultValues: { name: "", email: "", projectType: "", message: "" },
   });
 
   async function onSubmit(values: ContactInput) {
@@ -127,7 +127,7 @@ export function Contact() {
               <DialogTrigger asChild>
                 <Button variant="outline" className="mt-8">
                   <Palette className="mr-2 h-4 w-4" />
-                  View Service Menu
+                  See full services
                 </Button>
               </DialogTrigger>
               <DialogContent>
@@ -164,47 +164,29 @@ export function Contact() {
                   {errors.email ? <p className="text-sm text-destructive">{errors.email.message}</p> : null}
                 </div>
               </div>
-              <div className="grid gap-5 md:grid-cols-2">
-                <div className="grid gap-2">
-                  <Label>Project Type</Label>
-                  <Select onValueChange={(value) => setValue("projectType", value, { shouldValidate: true })}>
-                    <SelectTrigger aria-label="Select project type">
-                      <SelectValue placeholder="Select project type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {projectTypes.map((type) => (
-                        <SelectItem key={type} value={type}>
-                          {type}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  {errors.projectType ? <p className="text-sm text-destructive">{errors.projectType.message}</p> : null}
-                </div>
-                <div className="grid gap-2">
-                  <Label>Budget Range</Label>
-                  <Select onValueChange={(value) => setValue("budgetRange", value, { shouldValidate: true })}>
-                    <SelectTrigger aria-label="Select budget range">
-                      <SelectValue placeholder="Select budget range" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {budgetRanges.map((range) => (
-                        <SelectItem key={range} value={range}>
-                          {range}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  {errors.budgetRange ? <p className="text-sm text-destructive">{errors.budgetRange.message}</p> : null}
-                </div>
+              <div className="grid gap-2">
+                <Label>Project Type</Label>
+                <Select onValueChange={(value) => setValue("projectType", value, { shouldValidate: true })}>
+                  <SelectTrigger aria-label="Select project type">
+                    <SelectValue placeholder="Select project type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {projectTypes.map((type) => (
+                      <SelectItem key={type} value={type}>
+                        {type}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {errors.projectType ? <p className="text-sm text-destructive">{errors.projectType.message}</p> : null}
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="message">Message</Label>
-                <Textarea id="message" placeholder="Tell me about the product, audience, timeline, and visual direction." {...register("message")} />
+                <Textarea id="message" placeholder="What are you working on?" {...register("message")} />
                 {errors.message ? <p className="text-sm text-destructive">{errors.message.message}</p> : null}
               </div>
               <Button type="submit" size="lg" disabled={isSubmitting}>
-                {isSubmitting ? "Sending..." : "Send Message"}
+                {isSubmitting ? "Sending..." : "Start a conversation"}
                 <Send className="ml-2 h-4 w-4" />
               </Button>
             </form>

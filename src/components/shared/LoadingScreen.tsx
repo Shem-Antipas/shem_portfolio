@@ -4,13 +4,17 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 export function LoadingScreen() {
+  const [mounted, setMounted] = useState(false);
   const [show, setShow] = useState(true);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
+    setMounted(true);
     const timer = window.setTimeout(() => setShow(false), reduceMotion ? 200 : 3000);
     return () => window.clearTimeout(timer);
   }, [reduceMotion]);
+
+  if (!mounted) return null;
 
   return (
     <AnimatePresence>

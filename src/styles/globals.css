@@ -102,6 +102,23 @@
     @apply font-display text-4xl font-bold leading-[0.95] md:text-6xl lg:text-7xl;
   }
 
+  .hero-headline,
+  .case-study-title {
+    font-family: var(--font-dm-serif-display), Georgia, serif;
+    font-style: italic;
+    letter-spacing: 0;
+  }
+
+  .js-animated-headline .static-headline {
+    display: none;
+  }
+
+  noscript .static-headline,
+  .no-js-headline {
+    display: inline;
+    white-space: normal;
+  }
+
   .stroke-text {
     color: transparent;
     -webkit-text-stroke: 1px hsl(var(--foreground) / 0.72);

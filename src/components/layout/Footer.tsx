@@ -17,6 +17,7 @@ const socialIcons = [
 
 export function Footer() {
   const reduceMotion = useReducedMotion();
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-card/60">
@@ -33,7 +34,7 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-[1fr_auto_1fr] md:items-center">
           <div>
             <p className="font-display text-xl font-bold">Antipas Shem</p>
-            <p className="mt-1 text-sm text-muted-foreground">Designed & built by me, Antipas Shem · 2025</p>
+            <p className="mt-1 text-sm text-muted-foreground">Copyright {currentYear} Antipas Shem. Designed & built by me.</p>
           </div>
           <nav className="flex flex-wrap gap-4 text-sm text-muted-foreground">
             {navItems.map((item) => (

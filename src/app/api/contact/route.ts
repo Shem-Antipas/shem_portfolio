@@ -3,6 +3,8 @@ import { Resend } from "resend";
 
 import { contactSchema } from "@/lib/validations";
 
+const CONTACT_TO_EMAIL = "antipasshem@gmail.com";
+
 let resend: Resend | null = null;
 
 function getResend() {
@@ -21,22 +23,21 @@ export async function POST(request: Request) {
 
   const client = getResend();
   if (!client) {
-    return NextResponse.json({ ok: true, preview: true });
+    return NextResponse.json({ error: "Email service is not configured." }, { status: 503 });
   }
 
-  const { name, email, projectType, budgetRange, message } = parsed.data;
+  const { name, email, projectType, message } = parsed.data;
 
   try {
     await client.emails.send({
       from: process.env.RESEND_FROM_EMAIL ?? "Portfolio <onboarding@resend.dev>",
-      to: process.env.CONTACT_TO_EMAIL ?? "antipasshem@gmail.com",
+      to: CONTACT_TO_EMAIL,
       replyTo: email,
       subject: `New portfolio inquiry: ${projectType}`,
       text: [
         `Name: ${name}`,
         `Email: ${email}`,
         `Project Type: ${projectType}`,
-        `Budget Range: ${budgetRange}`,
         "",
         message,
       ].join("\n"),

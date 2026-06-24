@@ -33,11 +33,7 @@ export function TimelineItem({ item, index }: TimelineItemProps) {
               </div>
               <Badge variant="outline">{item.range}</Badge>
             </div>
-            <ul className="space-y-2 text-sm leading-6 text-muted-foreground">
-              {item.points.map((point) => (
-                <li key={point}>• {point}</li>
-              ))}
-            </ul>
+            <p className="text-sm leading-7 text-muted-foreground">{item.narrative}</p>
             <div className="mt-5 flex flex-wrap gap-2">
               {item.tools.map((tool) => (
                 <Badge key={tool} variant="secondary">

@@ -9,9 +9,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { capabilities, stats } from "@/lib/data";
 import { useCountUp } from "@/hooks/useCountUp";
 
-const blurDataURL =
-  "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTAnIGhlaWdodD0nMTInIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHJlY3QgZmlsbD0nI0VBREZDQicgd2lkdGg9JzEwJyBoZWlnaHQ9JzEyJy8+PC9zdmc+";
-
 function StatCard({ value, suffix, label }: { value: number; suffix: string; label: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const count = useCountUp(value, ref);
@@ -19,7 +16,7 @@ function StatCard({ value, suffix, label }: { value: number; suffix: string; lab
   return (
     <Card ref={ref} className="bg-card/70">
       <CardContent className="p-5">
-        <p className="stroke-text font-display text-5xl font-bold leading-none">
+        <p className="font-display text-5xl font-bold leading-none text-primary">
           {count}
           {suffix}
         </p>
@@ -43,16 +40,38 @@ export function About() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7 }}
         >
-          <div className="relative aspect-[6/7] overflow-hidden rounded-lg border bg-card shadow-luxe">
-            <Image
-              src="/images/about-portrait.svg"
-              alt="Editorial portrait illustration for Antipas Shem"
-              fill
-              sizes="(max-width: 1024px) 100vw, 520px"
-              placeholder="blur"
-              blurDataURL={blurDataURL}
-              className="object-cover"
-            />
+          <div className="relative aspect-[6/7] overflow-hidden rounded-lg border bg-card p-3 shadow-luxe">
+            <div className="grid h-full grid-rows-[1.08fr_0.92fr] gap-3">
+              <div className="relative overflow-hidden rounded-md border bg-muted">
+                <Image
+                  src="/images/projects/Inkwell Home landing.png"
+                  alt="Inkwell Creations website hero design"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 520px"
+                  className="object-cover object-left-top"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="relative overflow-hidden rounded-md border bg-muted">
+                  <Image
+                    src="/images/projects/Holidawn-landing.png"
+                    alt="Holidawn Adventures website hero design"
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 250px"
+                    className="object-cover object-center"
+                  />
+                </div>
+                <div className="relative overflow-hidden rounded-md border bg-muted">
+                  <Image
+                    src="/images/projects/MIFBEMS Dashboard.png"
+                    alt="MIFBeDAS fisheries dashboard interface"
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 250px"
+                    className="object-cover object-left-top"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
           {badges.map((badge, index) => (
             <motion.div
@@ -82,19 +101,19 @@ export function About() {
                 className="inline-flex items-center gap-2 rounded-full border bg-background/50 px-4 py-2 text-sm shadow-sm backdrop-blur"
               >
                 <span className="font-semibold">{capability.label}</span>
-                <span className="font-mono text-xs text-primary">({capability.value}%)</span>
               </div>
             ))}
           </div>
           <div className="mt-7 space-y-5 text-lg leading-8 text-muted-foreground">
             <p>
-              I am a multidisciplinary UI/UX Designer, Graphic Designer, and Creative Technologist focused on building
-              premium digital experiences across web, mobile, branding, and SaaS platforms.
+              I&apos;m a Creative Designer at Kenya Airways - Africa&apos;s flagship carrier - where I&apos;ve spent 4+ years
+              shipping campaigns, building brand systems, and designing enterprise product UIs used by thousands of
+              staff and passengers.
             </p>
             <p>
-              My work combines modern UI/UX systems, frontend product design, brand identity development, motion and
-              visual storytelling, product prototyping, and full-stack product implementation. I focus on design systems,
-              information hierarchy, Figma prototypes, Adobe CC workflows, and accessible responsive interfaces.
+              Outside of KQ, I build polished digital products through my studio, Inkwell Creations - including Advent
+              Study Hub, an Android app serving the East African Seventh-day Adventist community published on the Google
+              Play Store.
             </p>
           </div>
           <div className="mt-7 flex flex-wrap gap-2">

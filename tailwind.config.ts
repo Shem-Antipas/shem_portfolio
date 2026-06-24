@@ -27,6 +27,7 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-montserrat)", "ui-sans-serif", "system-ui", "sans-serif"],
         display: ["var(--font-montserrat)", "ui-sans-serif", "system-ui", "sans-serif"],
+        editorial: ["var(--font-dm-serif-display)", "Georgia", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",

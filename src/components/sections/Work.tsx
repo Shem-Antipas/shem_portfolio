@@ -50,18 +50,25 @@ export function Work() {
         </TabsList>
         {filters.map((filter) => {
           const visible = filter === "All" ? projects : projects.filter((project) => project.category === filter);
+          const heroProjects = visible.filter((project) => project.tier === 1);
+          const supportingProjects = visible.filter((project) => project.tier !== 1);
           return (
             <TabsContent key={filter} value={filter}>
               <motion.div
-                className="grid gap-5 md:grid-cols-2 xl:grid-cols-3"
+                className="grid gap-5"
                 initial={reduceMotion ? false : "hidden"}
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={{ visible: { transition: { staggerChildren: 0.05 } }, hidden: {} }}
               >
-                {visible.map((project, index) => (
-                  <ProjectCard key={project.slug} project={project} index={index} />
+                {heroProjects.map((project, index) => (
+                  <ProjectCard key={project.slug} project={project} index={index} featured />
                 ))}
+                <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                  {supportingProjects.map((project, index) => (
+                    <ProjectCard key={project.slug} project={project} index={index + heroProjects.length} />
+                  ))}
+                </div>
               </motion.div>
             </TabsContent>
           );

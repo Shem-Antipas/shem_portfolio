@@ -55,7 +55,9 @@ export function Testimonials() {
                     </Avatar>
                     <div>
                       <p className="font-semibold">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.company}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {testimonial.title} · {testimonial.company}
+                      </p>
                     </div>
                   </div>
                 </CardContent>
