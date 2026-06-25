@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Home } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -11,14 +11,25 @@ import { Button } from "@/components/ui/button";
 export function NotFoundView() {
   const reduceMotion = useReducedMotion();
   const router = useRouter();
+  const [countdown, setCountdown] = useState(8);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => {
+    if (countdown <= 0) {
       router.replace("/");
-    }, 4500);
+      return;
+    }
 
-    return () => window.clearTimeout(timer);
-  }, [router]);
+    const countdownTimer = window.setTimeout(() => {
+      setCountdown((value) => Math.max(value - 1, 0));
+    }, 1000);
+
+    return () => window.clearTimeout(countdownTimer);
+  }, [countdown, router]);
+
+  const countdownText = useMemo(
+    () => `Redirecting in ${countdown} second${countdown === 1 ? "" : "s"}…`,
+    [countdown],
+  );
 
   return (
     <main className="grid min-h-screen place-items-center overflow-hidden px-4 pt-16">
@@ -36,9 +47,7 @@ export function NotFoundView() {
         <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
           The page you are looking for does not exist, or the route has moved during a redesign.
         </p>
-        <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground">
-          Redirecting to the homepage in a few seconds. Click below to go back now.
-        </p>
+        <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground">{countdownText}</p>
         <Button asChild size="lg" className="mt-8">
           <Link href="/">
             <Home className="mr-2 h-4 w-4" />
