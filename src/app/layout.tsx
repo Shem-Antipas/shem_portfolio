@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description: "My portfolio spans UI/UX systems, graphic design, branding, motion, and product implementation.",
     url: "https://shem-ui-ux-portfolio.vercel.app",
     siteName: "Antipas Shem Portfolio",
-    images: [{ url: "/images/projects/inkwell-og.jpg", width: 1200, height: 630, alt: "Antipas Shem portfolio work preview" }],
+    images: [{ url: "/images/Portfolio-logo-faicon.png", width: 1200, height: 630, alt: "Antipas Shem logo" }],
     locale: "en_US",
     type: "website",
   },
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Antipas Shem - UI/UX Designer & Creative Technologist",
     description: "UI/UX, graphic design, branding, motion, and product implementation portfolio.",
-    images: ["/images/projects/inkwell-og.jpg"],
+    images: ["/images/Portfolio-logo-faicon.png"],
   },
 };
 
