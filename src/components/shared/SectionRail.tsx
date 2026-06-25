@@ -12,7 +12,10 @@ export function SectionRail() {
 
   useEffect(() => {
     const observers = railItems
-      .map((item) => document.querySelector(item.href))
+      .map((item) => {
+        const selector = item.href.startsWith("/") ? item.href.slice(1) : item.href;
+        return document.querySelector(selector);
+      })
       .filter((section): section is Element => section !== null)
       .map((section) => {
         const observer = new IntersectionObserver(

@@ -4,6 +4,7 @@ import { DM_Serif_Display, Montserrat } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { Providers } from "@/components/providers";
+import { ScrollToTopButton } from "@/components/shared/ScrollToTopButton";
 import "@/styles/globals.css";
 
 const montserrat = Montserrat({
@@ -30,6 +31,9 @@ export const metadata: Metadata = {
     "My UI/UX, graphic design, brand identity, SaaS product design, and motion-driven creative technology portfolio.",
   keywords: ["UI/UX Designer", "Graphic Designer", "Creative Technologist", "Brand Identity", "SaaS Design", "Figma"],
   authors: [{ name: "Antipas Shem" }],
+  icons: {
+    icon: "/images/Portfolio-logo-faicon.png",
+  },
   openGraph: {
     title: "Antipas Shem - UI/UX Designer & Creative Technologist",
     description: "My portfolio spans UI/UX systems, graphic design, branding, motion, and product implementation.",
@@ -55,6 +59,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <Navbar />
           {children}
           <Footer />
+          <ScrollToTopButton />
         </Providers>
       </body>
     </html>

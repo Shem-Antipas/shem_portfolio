@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, CheckCircle2, ExternalLink } from "lucide-react"
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { CaseStudyScreens } from "@/components/shared/CaseStudyScreens";
 import { ProjectVisual } from "@/components/shared/ProjectVisual";
 import { Separator } from "@/components/ui/separator";
 import { projects } from "@/lib/data";
@@ -176,36 +177,7 @@ export default function WorkDetailPage({ params }: PageProps) {
             ))}
             {caseStudy ? (
               <>
-                <div>
-                  <p className="eyebrow">Screens</p>
-                  <div className="mt-4 grid gap-4 md:grid-cols-2">
-                    {caseStudy.screens.map((screen, screenIndex) => {
-                      const screenImage = project.images?.[screenIndex] ?? project.images?.[0];
-
-                      return (
-                        <Card key={screen.title} className="bg-card/70">
-                          <CardContent className="p-5">
-                            {screenImage ? (
-                              <div className="mb-4 aspect-[16/9] overflow-hidden rounded-lg border bg-muted">
-                                <div className="relative h-full w-full">
-                                  <Image
-                                    src={screenImage.src}
-                                    alt={screenImage.alt}
-                                    fill
-                                    sizes="(max-width: 768px) 92vw, 520px"
-                                    className="object-cover object-top"
-                                  />
-                                </div>
-                              </div>
-                            ) : null}
-                            <h3 className="font-display text-xl font-semibold">{screen.title}</h3>
-                            <p className="mt-3 text-sm leading-6 text-muted-foreground">{screen.caption}</p>
-                          </CardContent>
-                        </Card>
-                      );
-                    })}
-                  </div>
-                </div>
+                <CaseStudyScreens project={project} />
                 <Card className="bg-card/70">
                   <CardContent className="p-6 md:p-8">
                     <p className="eyebrow">Design Decisions Worth Noting</p>

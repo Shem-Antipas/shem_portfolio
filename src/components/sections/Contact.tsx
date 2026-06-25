@@ -46,18 +46,24 @@ export function Contact() {
         body: JSON.stringify(values),
       });
 
-      if (!response.ok) throw new Error("Unable to send message");
+      const responseBody = await response.json().catch(() => null);
+      if (!response.ok) {
+        throw new Error(responseBody?.error ?? "Unable to send message.");
+      }
 
       toast({
         title: "Message sent",
         description: "Thanks for reaching out. I will get back to you shortly.",
       });
       reset();
-    } catch {
+    } catch (error) {
       toast({
         variant: "destructive",
         title: "Message not sent",
-        description: "Please try again, or email directly if the issue persists.",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Please try again, or email directly if the issue persists.",
       });
     } finally {
       setIsSubmitting(false);

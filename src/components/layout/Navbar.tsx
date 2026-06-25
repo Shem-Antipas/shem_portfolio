@@ -1,8 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Sparkles } from "lucide-react";
+import Image from "next/image";
+import { Menu } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { Button } from "@/components/ui/button";
@@ -18,6 +21,14 @@ import { navItems } from "@/lib/data";
 export function Navbar() {
   const { scrollY } = useScroll();
   const borderOpacity = useTransform(scrollY, [0, 96], [0, 1]);
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const logoSrc = mounted && theme === "light" ? "/images/Portfolio-logo-black.png" : "/images/Portfolio-logo-white.png";
 
   return (
     <motion.header
@@ -25,11 +36,15 @@ export function Navbar() {
       style={{ borderColor: useTransform(borderOpacity, (value) => `hsl(var(--border) / ${value})`) }}
     >
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="group flex items-center gap-3" aria-label="Antipas Shem home">
-          <span className="grid h-9 w-9 place-items-center rounded-md border border-border bg-card text-primary shadow-sm">
-            <Sparkles className="h-4 w-4" />
-          </span>
-          <span className="font-display text-lg font-bold">Antipas Shem</span>
+        <Link href="/" aria-label="Antipas Shem home">
+          <Image
+            src={logoSrc}
+            alt="Antipas Shem logo"
+            width={96}
+            height={24}
+            className="h-10 w-auto object-contain"
+            priority
+          />
         </Link>
 
         <NavigationMenu className="hidden lg:flex">
@@ -49,7 +64,7 @@ export function Navbar() {
         <div className="hidden items-center gap-2 lg:flex">
           <ThemeToggle />
           <Button asChild>
-            <Link href="#contact">Start a Project</Link>
+            <Link href="/#contact">Start a Project</Link>
           </Button>
         </div>
 
@@ -75,7 +90,7 @@ export function Navbar() {
                 ))}
                 <SheetClose asChild>
                   <Button asChild className="mt-4">
-                    <Link href="#contact">Start a Project</Link>
+                    <Link href="/#contact">Start a Project</Link>
                   </Button>
                 </SheetClose>
               </nav>
