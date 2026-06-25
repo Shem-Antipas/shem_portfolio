@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 export function NotFoundView() {
   const reduceMotion = useReducedMotion();
   const router = useRouter();
-  const [countdown, setCountdown] = useState(8);
+  const [countdown, setCountdown] = useState(10);
 
   useEffect(() => {
     if (countdown <= 0) {
