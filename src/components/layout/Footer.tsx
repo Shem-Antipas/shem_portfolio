@@ -34,7 +34,7 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-[1fr_auto_1fr] md:items-center">
           <div>
             <p className="font-display text-xl font-bold">Antipas Shem</p>
-            <p className="mt-1 text-sm text-muted-foreground">Copyright {currentYear} Antipas Shem. Designed & built by me.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Copyright {currentYear} Antipas Shem.</p>
             <p className="mt-1 text-sm text-muted-foreground">
               Designed by{' '}
               <Link href="https://inkwell-creations.vercel.app/" target="_blank" rel="noreferrer" className="text-primary transition-colors hover:underline">
